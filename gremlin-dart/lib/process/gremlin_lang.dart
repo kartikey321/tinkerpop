@@ -234,17 +234,4 @@ class GremlinLang {
   /// Converts a single value to its gremlin-lang literal representation.
   static String valueToGremlinLiteral(dynamic value) =>
       GremlinLang()._argAsString(value);
-
-  /// Substitutes parameter variables in a gremlin-lang string by replacing
-  /// each word-boundary occurrence of each key with its gremlin-lang literal.
-  static String substituteParameters(
-      String gremlin, Map<String, dynamic>? params) {
-    if (params == null || params.isEmpty) return gremlin;
-    var result = gremlin;
-    for (final entry in params.entries) {
-      final literal = GremlinLang()._argAsString(entry.value);
-      result = result.replaceAll(RegExp(r'\b' + entry.key + r'\b'), literal);
-    }
-    return result;
-  }
 }

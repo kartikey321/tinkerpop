@@ -77,7 +77,7 @@ class DriverRemoteConnection extends RemoteConnection {
       evaluationTimeout: evalTimeout,
       bulkResults: bulkResults,
       materializeProperties: materializeProperties,
-      // bindings is a pre-formatted string here; client handles it below
+
     );
 
     return (gremlinLang.getGremlin(), requestOptions);

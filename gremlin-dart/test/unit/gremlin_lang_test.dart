@@ -110,12 +110,10 @@ void main() {
       expect(json['timeoutMs'], 3000);
     });
 
-    test('throws on mixed bindings', () {
+    test('addBindingsString is removed', () {
       expect(
-        () => RequestMessage.build('g.V()')
-            .addBinding('x', 1)
-            .addBindingsString('["y":2]'),
-        throwsStateError,
+        () => RequestMessage.build('g.V()').addBindingsString('["y":2]'),
+        throwsUnsupportedError,
       );
     });
   });
