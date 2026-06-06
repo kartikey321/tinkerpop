@@ -53,14 +53,17 @@ class GraphTraversalSource {
 
   GraphTraversalSource with_(String key, [dynamic value]) {
     final val = value ?? true;
-    final opts = gremlinLang.getOptionsStrategies();
+    final gl = GremlinLang(gremlinLang);
+    final opts = gl.getOptionsStrategies();
     if (opts.isEmpty) {
-      return withStrategies([OptionsStrategy({key: val})]);
+      opts.add(OptionsStrategy({key: val}));
+    } else {
+      // Replace the last entry in the clone's list with a new merged copy,
+      // so the original source's OptionsStrategy object is never mutated.
+      final merged = Map<String, dynamic>.from(opts.last.configuration)..[key] = val;
+      opts[opts.length - 1] = OptionsStrategy(merged);
     }
-    // Clone the last strategy so we don't mutate the original source's config.
-    final merged = Map<String, dynamic>.from(opts.last.configuration)..[key] = val;
-    final strategies = [...opts.sublist(0, opts.length - 1), OptionsStrategy(merged)];
-    return withStrategies(strategies);
+    return _spawn(gl);
   }
 
   GraphTraversalSource withBulk([List<dynamic>? args]) =>
