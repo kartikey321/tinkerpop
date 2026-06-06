@@ -87,8 +87,6 @@ class GraphSetup {
       final builder = RequestMessage.build(resolved)
           .addG(traversalSource)
           .addBulkResults(true);
-      // Pass parameters as typed gremlin-lang bindings so the server resolves
-      // each variable to its proper typed value (int, float, Vertex, etc.).
       if (params != null && params.isNotEmpty) {
         builder.addBindings(params);
       }
