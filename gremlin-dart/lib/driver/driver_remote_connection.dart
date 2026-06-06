@@ -42,13 +42,9 @@ class DriverRemoteConnection extends RemoteConnection {
   }
 
   (String, RequestOptions) _buildRequestArgs(GremlinLang gremlinLang) {
-    gremlinLang.addG(_client.options.traversalSource);
-
     final strategies = gremlinLang.getOptionsStrategies();
     final allowed = {
       'evaluationTimeout',
-      'batchSize',
-      'userAgent',
       'materializeProperties',
       'bulkResults',
     };

@@ -328,6 +328,7 @@ class FeatureSteps {
     if (value is GDouble) return value.value;
     if (value is GByte) return value.value;
     if (value is GShort) return value.value;
+    if (value is GDecimal) return value.toDouble();
     if (value is EnumValue) return value.toString();
     if (value is Path) return value.objects.map(_normalize).toList();
     if (value is Property) return Property(value.key, _normalize(value.value));

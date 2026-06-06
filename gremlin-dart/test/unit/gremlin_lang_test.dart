@@ -62,16 +62,6 @@ void main() {
       expect(gl.getGremlin(), contains("within([1,2,3])"));
     });
 
-    test('getParametersAsString returns [:]  for empty', () {
-      final gl = GremlinLang();
-      expect(gl.getParametersAsString(), '[:]');
-    });
-
-    test('getParametersAsString includes g binding', () {
-      final gl = GremlinLang();
-      gl.addG('g');
-      expect(gl.getParametersAsString(), contains("'g':'g'"));
-    });
   });
 
   group('P predicates', () {
@@ -110,12 +100,6 @@ void main() {
       expect(json['timeoutMs'], 3000);
     });
 
-    test('addBindingsString is removed', () {
-      expect(
-        () => RequestMessage.build('g.V()').addBindingsString('["y":2]'),
-        throwsUnsupportedError,
-      );
-    });
   });
 
   group('GraphTraversal DSL', () {

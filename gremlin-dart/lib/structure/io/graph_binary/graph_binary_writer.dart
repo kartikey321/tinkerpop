@@ -87,6 +87,8 @@ class _GraphBinaryValueWriter {
       writeDouble(value);
     } else if (value is bool) {
       writeBoolean(value);
+    } else if (value is GDecimal) {
+      writeGDecimal(value);
     } else if (value is BigInt) {
       writeBigInt(value);
     } else if (value is String) {
@@ -187,6 +189,14 @@ class _GraphBinaryValueWriter {
     _writeHeader(DataType.binary, fullyQualified);
     _writeInt32Bare(value.length);
     _builder.add(value);
+  }
+
+  void writeGDecimal(GDecimal value, {bool fullyQualified = true}) {
+    _writeHeader(DataType.bigDecimal, fullyQualified);
+    _writeInt32Bare(value.scale);
+    final bytes = _bigIntToBytes(value.unscaled);
+    _writeInt32Bare(bytes.length);
+    _builder.add(bytes);
   }
 
   void writeBigInt(BigInt value, {bool fullyQualified = true}) {

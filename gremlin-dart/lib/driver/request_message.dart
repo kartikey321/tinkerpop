@@ -83,11 +83,6 @@ class RequestMessageBuilder {
     return this;
   }
 
-  RequestMessageBuilder addBindingsString(String bindingsStr) {
-    throw UnsupportedError(
-        'addBindingsString() removed: use addBindings(Map) instead');
-  }
-
   RequestMessageBuilder addG(String g) {
     _g = g;
     return this;

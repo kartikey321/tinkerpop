@@ -28,18 +28,12 @@ const int _int32Max = 2147483647;
 class GremlinLang {
   String _gremlin = '';
   final List<OptionsStrategy> _optionsStrategies;
-  final Map<String, dynamic> _parameters;
 
   GremlinLang([GremlinLang? toClone])
       : _gremlin = toClone?._gremlin ?? '',
-        _optionsStrategies = List.of(toClone?._optionsStrategies ?? []),
-        _parameters = Map.of(toClone?._parameters ?? {});
+        _optionsStrategies = List.of(toClone?._optionsStrategies ?? []);
 
   List<OptionsStrategy> getOptionsStrategies() => _optionsStrategies;
-
-  void addG(String g) => _parameters['g'] = g;
-
-  Map<String, dynamic> getParameters() => _parameters;
 
   // -------------------------------------------------------------------------
   // Serialisation helpers
@@ -217,18 +211,6 @@ class GremlinLang {
       return _gremlin;
     }
     return '$prefix$_gremlin';
-  }
-
-  String getParametersAsString() =>
-      convertParametersToString(_parameters);
-
-  static String convertParametersToString(Map<String, dynamic>? params) {
-    if (params == null || params.isEmpty) return '[:]';
-    final helper = GremlinLang();
-    final parts = params.entries
-        .map((e) => '${helper._argAsString(e.key)}:${helper._argAsString(e.value)}')
-        .toList();
-    return '[${parts.join(',')}]';
   }
 
   /// Converts a single value to its gremlin-lang literal representation.
