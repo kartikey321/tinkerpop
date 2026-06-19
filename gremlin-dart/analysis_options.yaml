@@ -15,22 +15,26 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: gremlin_dart
-description: Apache TinkerPop Gremlin driver for Dart
-version: 0.1.0
-homepage: https://tinkerpop.apache.org
-repository: https://github.com/apache/tinkerpop
-issue_tracker: https://issues.apache.org/jira/projects/TINKERPOP
+include: package:lints/recommended.yaml
 
-environment:
-  sdk: '>=3.0.0 <4.0.0'
+analyzer:
+  exclude:
+    - lib/language/grammar/GremlinLexer.dart
+    - lib/language/grammar/GremlinParser.dart
+    - lib/language/grammar/GremlinBaseVisitor.dart
+    - lib/language/grammar/GremlinVisitor.dart
+    - tool/**
+    - example/**
 
-dependencies:
-  antlr4: ^4.13.2
-  crypto: ^3.0.0
-  dio: ^5.4.0
-  uuid: ^4.4.0
-
-dev_dependencies:
-  lints: ^3.0.0
-  test: ^1.24.0
+linter:
+  rules:
+    - always_declare_return_types
+    - avoid_empty_else
+    - avoid_print
+    - avoid_relative_lib_imports
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - cancel_subscriptions
+    - close_sinks
+    - prefer_relative_imports
+    - unawaited_futures
